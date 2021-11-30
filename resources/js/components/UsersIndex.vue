@@ -1,13 +1,15 @@
 <template>
     <div>
         <div class="row mt-4">
-            <div class="col-sm-6 offset-6">
-                <input
-                    v-model="search"
-                    type="search"
-                    class="form-control"
-                    placeholder="Search by name,email or type..."
-                />
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input
+                        v-model="search"
+                        type="search"
+                        class="form-control border-end-0 border"
+                        placeholder="Search"
+                    />
+                </div>
             </div>
         </div>
         <div class="row mt-4">
@@ -38,7 +40,7 @@
                         <td>{{ user.last_logged_at }}</td>
                         <td>{{ user.authorized_at }}</td>
                         <td>
-                            <button class="btn btn-danger btn-md">
+                            <button class="btn btn-danger btn-block">
                                 {{ user.type }}
                             </button>
                         </td>
@@ -67,11 +69,14 @@ export default {
     watch:{
         paginate: function(value){
             this.getUsers();
-        }
+        },
+        search: function(value){
+            this.getUsers();
+        },
     },
     methods: {
         getUsers(page = 1){
-            axios.get('/api/users?page='+ page + '&paginate=' + this.paginate)
+            axios.get('/api/users?page='+ page + '&paginate=' + this.paginate + '&q=' + this.search)
             .then(response => {
                 this.users = response.data;
             });

@@ -18,4 +18,17 @@ class User extends Model
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
+
+    public function scopeSearch($query,$term)
+    {
+        $term = "%$term%";
+
+        $query->where(function($query) use ($term){
+            $query->where('name','like',$term)
+            ->orWhere('email','like',$term)
+            ->orWhereHas('type',function($query) use ($term){
+                $query->where('name','like',$term);
+            });
+        });
+    }
 }
