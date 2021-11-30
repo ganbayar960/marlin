@@ -7,6 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
     <title>User list</title>
     @yield('styles')
 </head>

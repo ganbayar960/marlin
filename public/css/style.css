@@ -1,0 +1,28 @@
+.page-link {
+    color: #000;
+}
+.page-link:hover {
+    color: #fff;
+    background-color: #cf9fff;
+    border-color: #bf40bf;
+}
+.page-item.active .page-link {
+    background-color: #800080;
+    border-color: #51414f;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #800080;
+    border-color: #51414f;
+}
+
+.btn-danger:hover {
+    background-color: #800080;
+    border-color: #51414f;
+}
+.btn-danger:focus,
+.btn-danger.focus {
+    background-color: #800080;
+    border-color: #51414f;
+}
