@@ -121,6 +121,7 @@ export default {
     },
     mounted(){
         this.getUsers();
+        this.getTypes();
     }
 };
 
