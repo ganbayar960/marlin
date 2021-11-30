@@ -40,7 +40,7 @@
                         <td>{{ user.last_logged_at }}</td>
                         <td>{{ user.authorized_at }}</td>
                         <td>
-                            <button class="btn btn-danger btn-block">
+                            <button class="btn btn-danger btn-block" @click="newModal">
                                 {{ user.type }}
                             </button>
                         </td>
@@ -54,6 +54,32 @@
                 <pagination :data="users" @pagination-change-page="getUsers"></pagination>
             </div>
         </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="updateType" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateType">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <select class="browser-default custom-select form-control" v-model="type">
+                            <option v-for="type in types.data" v-bind:key="type.id" :value="type.id">{{ type.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" >Update</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -64,6 +90,7 @@ export default {
             users: {},
             paginate : 10,
             search : "",
+            types : {},
         }
     },
     watch:{
@@ -81,6 +108,16 @@ export default {
                 this.users = response.data;
             });
         }
+        },
+        getTypes(){
+            axios.get('/api/types')
+            .then(response => {
+                this.types = response.data;
+            });
+        },
+        newModal(){
+            $('#typeModal').modal('show');
+        },
     },
     mounted(){
         this.getUsers();
