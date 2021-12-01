@@ -1,6 +1,6 @@
 # App using Laravel and Vue.JS
 
-## get it up and running.
+## Get it up and running.
 
 After you clone this project, do the following:
 
