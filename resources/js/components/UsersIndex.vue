@@ -49,8 +49,8 @@
             </table>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-sm-6 offset-6">
+        <div class="row">
+            <div class="col-sm-6 offset-6 d-flex justify-content-end">
                 <pagination :data="users" @pagination-change-page="getUsers"></pagination>
             </div>
         </div>
@@ -133,22 +133,16 @@ export default {
             this.form.reset();
             $('#editTypeModal').modal('show');
             this.form.fill(user);
-            this.form.type_id = this.types.data.filter(a => {
-                if(a.name === user.type){
-                    return true;
-                }
-                return false;
-            })[0].id;
+            this.form.type_id = user.type_id;
         },
         updateType(){
-                const _this = this;
                 this.form.put('api/user')
                 .then(response => {
-                    _this.users.data = _this.users.data.map(a => {
-                        if(_this.currentUser.id === a.id){
-                            a.type_id = _this.form.type_id;
-                            a.type = _this.types.data.filter(a => {
-                                if(a.id === _this.form.type_id){
+                    _this.users.data = this.users.data.map(a => {
+                        if(this.currentUser.id === a.id){
+                            a.type_id = this.form.type_id;
+                            a.type = this.types.data.filter(a => {
+                                if(a.id === this.form.type_id){
                                     return true;
                                 }
                                 return false;
